@@ -16,10 +16,10 @@ import com.brcaninovich.iks_okss.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
-    public int player_broj;
-    public int brojac;
-    public boolean zauzeto;
-    public boolean zavrsenGejm;
+    public int player_broj;     //Igrac koji je na redu
+    public int brojac;          //Brojac poteza kako bi se odredilo da li je DRAW
+    public boolean zauzeto;     //ZAUZETO POLJE
+    public boolean zavrsenGejm; //Zavrsena partija
 
 
     @Override
