@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity_toGame">
+
+
+    <LinearLayout
+        android:id="@+id/buttons_Layout"
+        android:gravity="center"
+        android:visibility="visible"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="vs bot"
+            android:layout_margin="20dp"
+            style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
+            app:cornerRadius="15dp"
+            app:backgroundTint="#FF5722"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/multiplayerDevice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Multiplayer device"
+            android:onClick="start_normal_game"
+            android:layout_margin="20dp"
+            style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
+            app:cornerRadius="15dp"
+            app:backgroundTint="#FF5722"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/multiplayerOnline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Multiplayer online"
+
+            android:layout_margin="20dp"
+            style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
+            app:cornerRadius="15dp"
+            app:backgroundTint="#FF5722"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/multiplayerLayout"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp">
+
+        <LinearLayout
+            android:id="@+id/joinLayout"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="JOIN CODE:"
+                android:textSize="22sp" />
+            <TextView
+                android:id="@+id/joinCodeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7552"
+                android:textSize="50sp" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/multiplayerCreate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create game"
+            android:layout_margin="20dp"
+            style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
+            app:cornerRadius="15dp"
+            app:backgroundTint="#FF5722"/>
+        <EditText
+            android:layout_marginTop="20dp"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter join code"
+            android:gravity="center"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/multiplayerJoin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Join Game"
+            android:layout_margin="10dp"
+            style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
+            app:cornerRadius="15dp"
+            app:backgroundTint="#FF5722"/>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
