@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.brcaninovich.iks_okss.databinding.ActivityOnlineBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,6 +48,11 @@ public class Networking {
         }catch (Exception e){
             Log.d("Probaa", "Test");
         }
+    }
+
+    public static void set_value(String room_number, int broj){
+
+
     }
 
 

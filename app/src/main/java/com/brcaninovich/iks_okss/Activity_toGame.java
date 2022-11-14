@@ -20,7 +20,7 @@ public class Activity_toGame extends AppCompatActivity {
 
     private ActivityToGameBinding binding;
     public static String room_number = "";
-    String user_name;
+    public static String user_name;
     String provjera;
     String nova_soba;
 
