@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/buttons_Layout"
         android:gravity="center"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -22,6 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="vs bot"
+            android:onClick="botGameStart"
             android:layout_margin="20dp"
             style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
             app:cornerRadius="15dp"
@@ -41,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Multiplayer online"
-
+            android:onClick="multiplayerLayoutShow"
             android:layout_margin="20dp"
             style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
             app:cornerRadius="15dp"
@@ -54,10 +55,18 @@
         android:gravity="center"
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp">
+
+        <EditText
+            android:id="@+id/usernameET"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Enter username"
+            />
 
         <LinearLayout
             android:id="@+id/joinLayout"
@@ -85,11 +94,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Create game"
+            android:onClick="create_multiplayer"
             android:layout_margin="20dp"
             style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
             app:cornerRadius="15dp"
             app:backgroundTint="#FF5722"/>
         <EditText
+            android:id="@+id/joincodeET"
             android:layout_marginTop="20dp"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
@@ -101,6 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Join Game"
+            android:onClick="join_multiplayer"
             android:layout_margin="10dp"
             style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
             app:cornerRadius="15dp"
