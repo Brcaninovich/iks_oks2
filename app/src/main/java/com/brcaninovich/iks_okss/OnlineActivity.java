@@ -20,13 +20,13 @@ import com.google.firebase.database.ValueEventListener;
 public class OnlineActivity extends AppCompatActivity {
 
     public static DatabaseReference databaseReference3;
-    String room_number = Activity_toGame.room_number;
     String username = Activity_toGame.user_name;
     ActivityOnlineBinding binding;
 
     String provjera;
 
-    String[] playeri;
+    String player1;
+    String player2;
     int broj;
     int na_potezu = 1;
 
@@ -34,35 +34,39 @@ public class OnlineActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityOnlineBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_online);
 
-        databaseReference3 = FirebaseDatabase.getInstance().getReference(room_number);
-        databaseReference3.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                provjera = snapshot.getValue().toString();
-                Log.d("Poruka", provjera);
-                provjera = provjera.substring(1, provjera.length()-1);
-                String[] tempArray= provjera.split(",");
-                playeri[0] = tempArray[0];
-                playeri[1] = tempArray[1];
+        try{
+            databaseReference3 = FirebaseDatabase.getInstance().getReference(Activity_toGame.room_number);
+            databaseReference3.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    provjera = snapshot.getValue().toString();
+                    provjera = provjera.substring(1, provjera.length()-1);
+                    String[] tempArray= provjera.split(", ");
+                    player1 = tempArray[0];
+                    player2 = tempArray[1];
+                    Log.d("Poruka", player1);
 
 
 
 
-            }
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }catch (Exception e){
+
+        }
     }
 
     public void set_value(View view) {
-        if(playeri[0].equals(username)){
+        if(player1.equals(username)){
             broj = 1;
-        }else if (playeri[1].equals(username)){
+        }else if (player2.equals(username)){
             broj = 2;
         }
 

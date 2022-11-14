@@ -41,11 +41,9 @@ public class Activity_toGame extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(kreiranje_sobe){
                         provjera = snapshot.getValue().toString();
-                        Log.d("Poruka", provjera);
                         provjera = provjera.substring(1, provjera.length()-1);
-                        String[] tempArray= provjera.split(",");
+                        String[] tempArray= provjera.split(", ");
                         if(tempArray.length >= 2){
-                            Log.d("Poruka", provjera);
                             temp(); //radi
                         }
                     }
@@ -104,11 +102,10 @@ public class Activity_toGame extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(trazenje_sobe){
                     provjera = snapshot.getValue().toString();
-                    Log.d("Poruka", provjera);
+                    Log.d("Poruka", provjera + "JOIN PORUKA");
                     provjera = provjera.substring(1, provjera.length()-1);
                     String[] tempArray= provjera.split(",");
                     if(tempArray.length >= 2){
-                        Log.d("Poruka", provjera);
                         temp(); //radi
                     }
                 }
