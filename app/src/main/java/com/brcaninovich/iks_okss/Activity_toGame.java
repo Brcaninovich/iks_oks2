@@ -19,20 +19,21 @@ import com.google.firebase.database.ValueEventListener;
 public class Activity_toGame extends AppCompatActivity {
 
     private ActivityToGameBinding binding;
-    String room_number;
+    public static String room_number = "";
     String user_name;
     String provjera;
+    String nova_soba;
 
     public static DatabaseReference databaseReference2;
-    boolean kreiranje_sobe = false;
+    public static boolean kreiranje_sobe = false;
+    public static boolean trazenje_sobe = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityToGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        room_number = "2558";
-
+        room_number = getRandomNumber(1000, 10000).toString();
         try{
             databaseReference2 = FirebaseDatabase.getInstance().getReference(room_number);
             databaseReference2.addValueEventListener(new ValueEventListener() {
@@ -40,10 +41,11 @@ public class Activity_toGame extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(kreiranje_sobe){
                         provjera = snapshot.getValue().toString();
+                        Log.d("Poruka", provjera);
                         provjera = provjera.substring(1, provjera.length()-1);
                         String[] tempArray= provjera.split(",");
-                        Log.d("Poruka", ((Integer)tempArray.length).toString());
-                        if(tempArray[tempArray.length - 1] != user_name){
+                        if(tempArray.length >= 2){
+                            Log.d("Poruka", provjera);
                             temp(); //radi
                         }
                     }
@@ -54,6 +56,7 @@ public class Activity_toGame extends AppCompatActivity {
                     Log.d("Poruka", "greska");
                 }
             });
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -62,8 +65,13 @@ public class Activity_toGame extends AppCompatActivity {
     }
 
 
+
+    public Integer getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
+
     public void temp(){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, OnlineActivity.class);
         finish();
         startActivity(intent);
     }
@@ -75,6 +83,7 @@ public class Activity_toGame extends AppCompatActivity {
     }
 
     public void create_multiplayer(View view) {
+
         binding.joinLayout.setVisibility(View.VISIBLE);
         user_name = binding.usernameET.getText().toString();
         binding.usernameET.setEnabled(false);
@@ -85,7 +94,31 @@ public class Activity_toGame extends AppCompatActivity {
     }
 
     public void join_multiplayer(View view) {
+        Networking.vrati_room(binding.joincodeET.getText().toString(), binding.usernameET.getText().toString());
+        kreiranje_sobe = false;
+        trazenje_sobe = true;
+        room_number = binding.joincodeET.getText().toString();
+        databaseReference2 = FirebaseDatabase.getInstance().getReference(binding.joincodeET.getText().toString());
+        databaseReference2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(trazenje_sobe){
+                    provjera = snapshot.getValue().toString();
+                    Log.d("Poruka", provjera);
+                    provjera = provjera.substring(1, provjera.length()-1);
+                    String[] tempArray= provjera.split(",");
+                    if(tempArray.length >= 2){
+                        Log.d("Poruka", provjera);
+                        temp(); //radi
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("Poruka", "greska");
+            }
+        });
     }
 
     public void multiplayerLayoutShow(View view) {
