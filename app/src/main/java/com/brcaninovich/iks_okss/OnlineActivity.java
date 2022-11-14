@@ -35,6 +35,7 @@ public class OnlineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityOnlineBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_online);
+        na_potezu = 1;
 
         try{
             databaseReference3 = FirebaseDatabase.getInstance().getReference(Activity_toGame.room_number);
@@ -74,7 +75,7 @@ public class OnlineActivity extends AppCompatActivity {
             if(na_potezu == 1 && broj == 1){
                 ((Button)view).setText("X");
                 na_potezu = 2;
-            }else{
+            }else if(na_potezu == 2 && broj == 2){
                 ((Button)view).setText("O");
                 na_potezu = 1;
             }
