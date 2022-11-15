@@ -3,6 +3,7 @@ package com.brcaninovich.iks_okss;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.NetworkOnMainThreadException;
 import android.util.Log;
@@ -27,6 +28,8 @@ public class OnlineActivity extends AppCompatActivity {
     String provjera;
     String player1;
     String player2;
+    boolean win;
+    Integer brojac = 0;
     int broj;
     int na_potezu = 1;
 
@@ -35,6 +38,7 @@ public class OnlineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityOnlineBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        win = false;
         na_potezu = 1;
         Log.d("Porukaaa", Activity_toGame.room_number);
         try{
@@ -42,6 +46,7 @@ public class OnlineActivity extends AppCompatActivity {
             databaseReference3.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        brojac++;
                         provjera = snapshot.getValue().toString();
                         provjera = provjera.substring(1, provjera.length()-1);
                         String[] tempArray= provjera.split(", ");
@@ -89,11 +94,24 @@ public class OnlineActivity extends AppCompatActivity {
                     }else if(tempArray[11].equals("2")){
                         binding.polje9.setText("O");
                     }
+                    if(tempArray[12].equals("1")){
+                        Networking.popuni_pocetak_gejma(Activity_toGame.room_number);
+                        navigateUpTo(new Intent(OnlineActivity.this, OnlineActivity.class));
+                        startActivity(getIntent());
+                        finish();
+                    }
                         player1 = tempArray[0];
                         player2 = tempArray[1];
                     String teemp = gameplay.pobjeda_online(tempArray);
                     String temp;
-                    if(teemp != null){
+                    if(teemp == null){
+                        if(brojac >= 19){
+                            binding.winnerTV.setText("DRAW");
+                            gameplay.winner_online(binding, 2);
+                            win= true;
+                        }
+                    }else {
+                        win = true;
                         if(teemp.equals("X")){
                             temp = player1;
                         }else{
@@ -101,7 +119,6 @@ public class OnlineActivity extends AppCompatActivity {
                         }
                         binding.winnerTV.setText(temp);
                         gameplay.winner_online(binding, 1);
-
                     }
                 }
 
@@ -123,22 +140,26 @@ public class OnlineActivity extends AppCompatActivity {
         }else if (player2.equals(username)){
             broj = 2;
         }
-        if(((Button)view).getText().equals("")){
-            if(na_potezu == 1 && broj == 1){
-                ((Button)view).setText("X");
-                potez = 1;
-                na_potezu = 2;
-            }else if(na_potezu == 2 && broj == 2){
-                ((Button)view).setText("O");
-                potez = 2;
-                na_potezu = 1;
+        if(!win){
+            if(((Button)view).getText().equals("")){
+                if(na_potezu == 1 && broj == 1){
+                    ((Button)view).setText("X");
+                    potez = 1;
+                    na_potezu = 2;
+                }else if(na_potezu == 2 && broj == 2){
+                    ((Button)view).setText("O");
+                    potez = 2;
+                    na_potezu = 1;
+                }
+                String temp = view.getResources().getResourceEntryName(view.getId());
+                Integer broj_polja = Integer.parseInt(temp.substring(temp.length() - 1));
+                Networking.set_value(Activity_toGame.room_number, broj_polja , potez, na_potezu);
             }
-            String temp = view.getResources().getResourceEntryName(view.getId());
-            Integer broj_polja = Integer.parseInt(temp.substring(temp.length() - 1));
-            Networking.set_value(Activity_toGame.room_number, broj_polja , potez, na_potezu);
         }
+
     }
 
     public void restart_game(View view) {
+        Networking.req_restart(Activity_toGame.room_number);
     }
 }

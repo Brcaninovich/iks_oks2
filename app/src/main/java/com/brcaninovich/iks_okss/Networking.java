@@ -54,6 +54,11 @@ public class Networking {
         }
     }
 
+    public static void req_restart(String room_number){
+        databaseReference = FirebaseDatabase.getInstance().getReference(room_number);
+        databaseReference.child("12").setValue("1"); //RESTART
+    }
+
     public static void popuni_pocetak_gejma(String room_number){
     try {
         databaseReference = FirebaseDatabase.getInstance().getReference(room_number);
