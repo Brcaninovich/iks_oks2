@@ -28,23 +28,31 @@ public class Activity_toGame extends AppCompatActivity {
     public static boolean kreiranje_sobe = false;
     public static boolean trazenje_sobe = false;
 
+    boolean test = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityToGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        test = true;
         room_number = getRandomNumber(1000, 10000).toString();
         try{
             databaseReference2 = FirebaseDatabase.getInstance().getReference(room_number);
             databaseReference2.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(kreiranje_sobe){
+                    if(kreiranje_sobe && test){
                         provjera = snapshot.getValue().toString();
                         provjera = provjera.substring(1, provjera.length()-1);
                         String[] tempArray= provjera.split(", ");
                         if(tempArray.length >= 2){
-                            temp(); //radi
+                            Networking.popuni_pocetak_gejma(Activity_toGame.room_number);
+                            if(tempArray.length >= 5){
+                                finish();
+                                temp(); //radi
+                                test = false;
+                            }
                         }
                     }
                 }
@@ -88,13 +96,14 @@ public class Activity_toGame extends AppCompatActivity {
         binding.joinCodeTV.setText(room_number);
         Networking.kreiraj_sobu(room_number, user_name);
         kreiranje_sobe = true;
+        trazenje_sobe = false;
         binding.multiplayerCreate.setEnabled(false);
     }
 
     public void join_multiplayer(View view) {
         Networking.vrati_room(binding.joincodeET.getText().toString(), binding.usernameET.getText().toString());
-        kreiranje_sobe = false;
         trazenje_sobe = true;
+        user_name = binding.usernameET.getText().toString();
         room_number = binding.joincodeET.getText().toString();
         databaseReference2 = FirebaseDatabase.getInstance().getReference(binding.joincodeET.getText().toString());
         databaseReference2.addValueEventListener(new ValueEventListener() {
@@ -105,8 +114,10 @@ public class Activity_toGame extends AppCompatActivity {
                     Log.d("Poruka", provjera + "JOIN PORUKA");
                     provjera = provjera.substring(1, provjera.length()-1);
                     String[] tempArray= provjera.split(",");
-                    if(tempArray.length >= 2){
+                    if(tempArray.length >= 5){
                         temp(); //radi
+                        Log.d("Porukica", room_number);
+                        trazenje_sobe = false;
                     }
                 }
             }

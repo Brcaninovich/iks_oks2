@@ -25,6 +25,9 @@ public class Networking {
     public static boolean mozeProc;
     public static String provjera2;
 
+    public static String room_index;
+    public static String room_username;
+
     public static void kreiraj_sobu(String string_sobe, String user_name){
         try {
             broj_sobe = string_sobe;
@@ -33,6 +36,7 @@ public class Networking {
             databaseReference = FirebaseDatabase.getInstance().getReference("Aktivne_Sobe");
             databaseReference.child(brojac2.toString()).setValue(broj_sobe);
             brojac2++;
+
 
         }catch (Exception e){
             Log.d("Probaa", "Test");
@@ -50,9 +54,32 @@ public class Networking {
         }
     }
 
-    public static void set_value(String room_number, int broj){
+    public static void popuni_pocetak_gejma(String room_number){
+    try {
+        databaseReference = FirebaseDatabase.getInstance().getReference(room_number);
+        databaseReference.child("2").setValue("1");
+        databaseReference.child("3").setValue("0"); //1
+        databaseReference.child("4").setValue("0"); //2
+        databaseReference.child("5").setValue("0"); //3
+        databaseReference.child("6").setValue("0"); //4
+        databaseReference.child("7").setValue("0"); //5
+        databaseReference.child("8").setValue("0"); //6
+        databaseReference.child("9").setValue("0"); //7
+        databaseReference.child("10").setValue("0"); //8
+        databaseReference.child("11").setValue("0"); //9
+        databaseReference.child("12").setValue("0"); //RESTART
 
+    }catch (Exception e){
 
+    }
+    }
+
+    public static void set_value(String room_number, Integer broj_polja, Integer uradio_potez, Integer sledeci_potez){
+        Integer temp = broj_polja + 2;
+        Log.d("Porukica", room_number);
+        databaseReference = FirebaseDatabase.getInstance().getReference(room_number);
+        databaseReference.child("2").setValue(sledeci_potez.toString());
+        databaseReference.child(temp.toString()).setValue(uradio_potez.toString());
     }
 
 
