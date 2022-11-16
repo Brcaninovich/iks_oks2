@@ -2,8 +2,11 @@ package com.brcaninovich.iks_okss;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
+
 
 public class Activity_toGame extends AppCompatActivity {
 
@@ -22,7 +27,8 @@ public class Activity_toGame extends AppCompatActivity {
     public static String room_number = "";
     public static String user_name;
     String provjera;
-    String nova_soba;
+    public static String probaa;
+    public static boolean Test = false;
 
     public static DatabaseReference databaseReference2;
     public static boolean kreiranje_sobe = false;
@@ -100,8 +106,18 @@ public class Activity_toGame extends AppCompatActivity {
         binding.multiplayerCreate.setEnabled(false);
     }
 
-    public void join_multiplayer(View view) {
-        Networking.vrati_room(binding.joincodeET.getText().toString(), binding.usernameET.getText().toString());
+    public boolean isConnected() throws InterruptedException, IOException {
+        String command = "ping -c 1 google.com";
+        return Runtime.getRuntime().exec(command).waitFor() == 0;
+    }
+
+    public void join_multiplayer(View view) throws IOException, InterruptedException {
+        boolean test = isConnected();
+            if(test){
+                if(!TextUtils.isEmpty(binding.usernameET.getText().toString())){
+                    Networking.vrati_room(binding.joincodeET.getText().toString(), binding.usernameET.getText().toString(), binding);
+                }
+            }
         trazenje_sobe = true;
         user_name = binding.usernameET.getText().toString();
         room_number = binding.joincodeET.getText().toString();
@@ -109,24 +125,28 @@ public class Activity_toGame extends AppCompatActivity {
         databaseReference2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(trazenje_sobe){
-                    provjera = snapshot.getValue().toString();
-                    Log.d("Poruka", provjera + "JOIN PORUKA");
-                    provjera = provjera.substring(1, provjera.length()-1);
-                    String[] tempArray= provjera.split(",");
-                    if(tempArray.length >= 5){
-                        temp(); //radi
-                        Log.d("Porukica", room_number);
-                        trazenje_sobe = false;
+                if(snapshot.exists()){
+                    if(trazenje_sobe){
+                        provjera = snapshot.getValue().toString();
+                        Log.d("Poruka", provjera + "JOIN PORUKA");
+                        provjera = provjera.substring(1, provjera.length()-1);
+                        String[] tempArray= provjera.split(",");
+                        if(tempArray.length >= 5){
+                            temp(); //radi
+                            Log.d("Porukica", room_number);
+                        }
                     }
+                    trazenje_sobe = false;
                 }
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("Poruka", "greska");
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.d("Poruka", "greska");
+                    }
+                });
+
+
     }
 
     public void multiplayerLayoutShow(View view) {

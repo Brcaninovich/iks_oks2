@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.brcaninovich.iks_okss.databinding.ActivityOnlineBinding;
+import com.brcaninovich.iks_okss.databinding.ActivityToGameBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +27,8 @@ public class Networking {
     public static String provjera2;
     public static String temp_provjera;
     static Integer provjera_return;
-    static boolean proc = true;
+    static boolean proc = false;
+
 
 
     public static String room_index;
@@ -71,10 +73,9 @@ public class Networking {
     }
 
     public static void join_u_bazu(String string_sobe, String user_name){
-        Log.d("Probaa", "Test");
         try{
-            databaseReference = FirebaseDatabase.getInstance().getReference(string_sobe);
-            databaseReference.child("1").setValue(user_name);
+                databaseReference = FirebaseDatabase.getInstance().getReference(string_sobe);
+                databaseReference.child("1").setValue(user_name);
         }catch (Exception e){
             Log.d("Probaa", "Test");
         }
@@ -114,7 +115,7 @@ public class Networking {
     }
 
 
-    public static void vrati_room(String unesena_soba, String username){
+    public static void vrati_room(String unesena_soba, String username, ActivityToGameBinding binding){
         temp = "x";
         Log.d("Poruka", unesena_soba);
         databaseReference = FirebaseDatabase.getInstance().getReference("Aktivne_Sobe");
@@ -136,6 +137,7 @@ public class Networking {
                         break;
                     }else{
                         Log.d("Poruka", "1. Nema podudaranja");
+                        proc = false;
                         tempic = false;
                     }
                 }
@@ -146,6 +148,7 @@ public class Networking {
 
             }
         });
-        Log.d("Probaa", "Test");
+        Log.d("Probaa",Boolean.toString(mozeProc));
+
     }
 }
