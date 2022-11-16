@@ -135,5 +135,7 @@ public class Activity_toGame extends AppCompatActivity {
     }
 
     public void botGameStart(View view) {
+        Intent intent = new Intent(this, BotActivity.class);
+        startActivity(intent);
     }
 }

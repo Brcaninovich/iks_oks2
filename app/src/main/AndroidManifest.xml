@@ -13,6 +13,13 @@
         android:theme="@style/Theme.Iks_okss"
         tools:targetApi="31">
         <activity
+            android:name=".BotActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".OnlineActivity"
             android:exported="false">
             <meta-data

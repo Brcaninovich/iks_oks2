@@ -24,18 +24,44 @@ public class Networking {
     public static String broj_sobe;
     public static boolean mozeProc;
     public static String provjera2;
+    public static String temp_provjera;
+    static Integer provjera_return;
+    static boolean proc = true;
+
 
     public static String room_index;
     public static String room_username;
 
+    public static void vraca_broj_aktivnih_soba(){
+            databaseReference = FirebaseDatabase.getInstance().getReference("Aktivne_Sobe");
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    temp_provjera = snapshot.getValue().toString();
+                    temp_provjera = temp_provjera.substring(1, temp_provjera.length()-1);
+                    String[] tempArray= temp_provjera.split(",");
+                    provjera_return = tempArray.length;
+
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+    }
+
     public static void kreiraj_sobu(String string_sobe, String user_name){
+        Log.d("Porukaaaa", brojac2.toString());
         try {
             broj_sobe = string_sobe;
             databaseReference = FirebaseDatabase.getInstance().getReference(broj_sobe);
             databaseReference.child("0").setValue(user_name);
             databaseReference = FirebaseDatabase.getInstance().getReference("Aktivne_Sobe");
-            databaseReference.child(brojac2.toString()).setValue(broj_sobe);
-            brojac2++;
+            databaseReference.child("0").setValue(broj_sobe);
 
 
         }catch (Exception e){
