@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity_toGame">
+    tools:context=".Activity_toGame"
+    android:background="@drawable/drawabletexture">
+
 
 
 
@@ -28,7 +30,7 @@
             android:layout_margin="20dp"
             style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
             app:cornerRadius="15dp"
-            app:backgroundTint="#FFA440"/>
+            app:backgroundTint="#15334f"/>
         <com.google.android.material.button.MaterialButton
             android:id="@+id/multiplayerDevice"
             android:layout_width="170dp"
@@ -39,7 +41,7 @@
             android:layout_margin="20dp"
             style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
             app:cornerRadius="15dp"
-            app:backgroundTint="#FFA440"/>
+            app:backgroundTint="#15334f"/>
         <com.google.android.material.button.MaterialButton
             android:id="@+id/multiplayerOnline"
             android:layout_width="170dp"
@@ -50,7 +52,7 @@
             android:layout_margin="20dp"
             style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
             app:cornerRadius="15dp"
-            app:backgroundTint="#FF7840"/>
+            app:backgroundTint="#15334f"/>
 
 
     </LinearLayout>
@@ -70,6 +72,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:hint="Enter username"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
             />
 
         <LinearLayout
@@ -84,11 +88,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="JOIN CODE:"
+                android:textColor="@color/white"
                 android:textSize="22sp" />
             <TextView
                 android:id="@+id/joinCodeTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="7552"
                 android:textSize="50sp" />
         </LinearLayout>
@@ -103,13 +109,15 @@
             android:layout_margin="20dp"
             style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
             app:cornerRadius="15dp"
-            app:backgroundTint="#FF7840"/>
+            app:backgroundTint="#15334f"/>
         <EditText
             android:id="@+id/joincodeET"
             android:layout_marginTop="20dp"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:hint="Enter join code"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
             android:gravity="center"
             />
         <com.google.android.material.button.MaterialButton
@@ -122,7 +130,7 @@
             android:layout_margin="10dp"
             style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
             app:cornerRadius="15dp"
-            app:backgroundTint="#FF7840"/>
+            app:backgroundTint="#15334f"/>
 
 
     </LinearLayout>
@@ -133,7 +141,7 @@
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/boogaloo"
-        android:textColor="#50DCFF"
+        android:textColor="#FDFFFF"
         android:text="Iks-Oks"
         android:textSize="50sp" />
 

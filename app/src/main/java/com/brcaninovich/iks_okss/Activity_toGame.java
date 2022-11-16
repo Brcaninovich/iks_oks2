@@ -115,7 +115,7 @@ public class Activity_toGame extends AppCompatActivity {
         boolean test = isConnected();
             if(test){
                 if(!TextUtils.isEmpty(binding.usernameET.getText().toString())){
-                    Networking.vrati_room(binding.joincodeET.getText().toString(), binding.usernameET.getText().toString(), binding);
+                    Networking.vrati_room(binding.joincodeET.getText().toString(), binding.usernameET.getText().toString());
                 }
             }
         trazenje_sobe = true;
@@ -145,8 +145,6 @@ public class Activity_toGame extends AppCompatActivity {
                         Log.d("Poruka", "greska");
                     }
                 });
-
-
     }
 
     public void multiplayerLayoutShow(View view) {

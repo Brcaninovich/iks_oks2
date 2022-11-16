@@ -115,7 +115,7 @@ public class Networking {
     }
 
 
-    public static void vrati_room(String unesena_soba, String username, ActivityToGameBinding binding){
+    public static void vrati_room(String unesena_soba, String username){
         temp = "x";
         Log.d("Poruka", unesena_soba);
         databaseReference = FirebaseDatabase.getInstance().getReference("Aktivne_Sobe");
