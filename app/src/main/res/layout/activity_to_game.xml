@@ -7,10 +7,11 @@
     tools:context=".Activity_toGame">
 
 
+
     <LinearLayout
         android:id="@+id/buttons_Layout"
         android:gravity="center"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -19,34 +20,37 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/botButton"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:text="vs bot"
+            android:text="Singleplayer"
+            android:fontFamily="@font/boogaloo"
             android:onClick="botGameStart"
             android:layout_margin="20dp"
             style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
             app:cornerRadius="15dp"
-            app:backgroundTint="#FF5722"/>
+            app:backgroundTint="#FFA440"/>
         <com.google.android.material.button.MaterialButton
             android:id="@+id/multiplayerDevice"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:text="Multiplayer device"
+            android:text="Multiplayer local"
+            android:fontFamily="@font/boogaloo"
             android:onClick="start_normal_game"
             android:layout_margin="20dp"
             style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
             app:cornerRadius="15dp"
-            app:backgroundTint="#FF5722"/>
+            app:backgroundTint="#FFA440"/>
         <com.google.android.material.button.MaterialButton
             android:id="@+id/multiplayerOnline"
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:text="Multiplayer online"
+            android:fontFamily="@font/boogaloo"
             android:onClick="multiplayerLayoutShow"
             android:layout_margin="20dp"
             style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
             app:cornerRadius="15dp"
-            app:backgroundTint="#FF5722"/>
+            app:backgroundTint="#FF7840"/>
 
 
     </LinearLayout>
@@ -55,7 +59,7 @@
         android:gravity="center"
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp">
@@ -91,14 +95,15 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/multiplayerCreate"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="Create game"
             android:onClick="create_multiplayer"
+            android:fontFamily="@font/boogaloo"
             android:layout_margin="20dp"
             style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
             app:cornerRadius="15dp"
-            app:backgroundTint="#FF5722"/>
+            app:backgroundTint="#FF7840"/>
         <EditText
             android:id="@+id/joincodeET"
             android:layout_marginTop="20dp"
@@ -109,17 +114,37 @@
             />
         <com.google.android.material.button.MaterialButton
             android:id="@+id/multiplayerJoin"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="Join Game"
             android:onClick="join_multiplayer"
+            android:fontFamily="@font/boogaloo"
             android:layout_margin="10dp"
             style="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
             app:cornerRadius="15dp"
-            app:backgroundTint="#FF5722"/>
+            app:backgroundTint="#FF7840"/>
 
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="10dp"
+        app:srcCompat="@mipmap/ic_launcher_foreground" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/boogaloo"
+        android:textColor="#50DCFF"
+        android:text="TicTacToe"
+        android:textSize="50sp" />
 
 
 </RelativeLayout>
